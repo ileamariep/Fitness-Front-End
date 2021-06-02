@@ -6,6 +6,8 @@ const BASE = 'https://fitnesstrac-kr.herokuapp.com/api/'
 
 // get my routines (registered user)
 
+// if data is an array - filter vs conditional
+
 // POST request - form to create a new routine
 // POST - update name and goal for routine
 // DELETE - able to delete an entire routine
@@ -16,11 +18,8 @@ const BASE = 'https://fitnesstrac-kr.herokuapp.com/api/'
 export async function getPublicRoutines() {
     try {
         const { data } = await axios.get(`${BASE}/routines`);
-        if (!data.isPublic) {
-            return null;
-        } else {
-            return data
-        }
+
+        return data
 
     } catch (error) {
         throw error;
