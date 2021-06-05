@@ -1,19 +1,9 @@
 import axios from 'axios';
+import { storeCurrentUser } from '../auth'
 
 const BASE = 'https://fitnesstrac-kr.herokuapp.com/api/'
 
-//get all routine public routines (any user can see this)
 
-// get my routines (registered user)
-
-// if data is an array - filter vs conditional
-
-// POST request - form to create a new routine
-// POST - update name and goal for routine
-// DELETE - able to delete an entire routine
-// POST - be able to add an activity to a routine via a small form which has a dropdown for all activities, an inputs for count and duration
-// POST - update durationi or count on any routine
-// DELETE - removve activity from routine
 
 export async function getPublicRoutines() {
     try {
@@ -26,20 +16,216 @@ export async function getPublicRoutines() {
     }
 }
 
-export async function getPostsByUser(userId) {
+export async function getActivities() {
     try {
-        const { data } = await axios.get(`${BASE}/users/${userId}/posts`);
+        const { data } = await axios.get(`${BASE}/activities`);
         return data;
     } catch (error) {
         throw error;
     }
 }
 
-export async function getTodosByUser(userId) {
+
+
+export async function updateActivity(id, updatedActivity) {
     try {
-        const { data } = await axios.get(`${BASE}/users/${userId}/todos`);
-        return data;
+        const data = await fetch(`${BASE}activities/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                name: '',
+                description: ''
+            }),
+            hheader: {
+                "Content-Type": "application/json"
+            }
+        });
+        const result = await data.json()
+
+        return result
+
     } catch (error) {
         throw error;
     }
 }
+
+export async function registerUser(username, password) {
+    try {
+        const response =
+            await fetch(`${BASE}/users/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            })
+
+        const data = await response.json()
+        const token = await data.token
+        storeCurrentUser(token)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+};
+
+export async function loginUser(username, password) {
+    try {
+        const response =
+            await fetch(`${BASE}/users/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            })
+
+        const data = await response.json()
+        const token = await data.token
+        storeCurrentUser(token)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+};
+
+export async function createRoutine(name, goal) {
+
+
+    try {
+        const myToken = JSON.parse(localStorage.getItem('token'))
+
+        const response =
+            await fetch(`${BASE}routines`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${myToken}`
+                },
+                body: JSON.stringify({
+                    name,
+                    goal,
+                    isPublic: true
+                }),
+            })
+
+        const data = await response.json()
+        return data
+
+    } catch (error) {
+        console.log(error)
+    }
+
+};
+
+export async function createActivity(name, description) {
+
+
+    try {
+        const myToken = JSON.parse(localStorage.getItem('token'))
+
+        const response =
+            await fetch(`${BASE}activities`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${myToken}`
+                },
+                body: JSON.stringify({
+                    name,
+                    description
+                }),
+            })
+
+        const data = await response.json()
+        return data
+
+    } catch (error) {
+        console.log(error)
+    }
+
+};
+
+export async function deleteRoutine(id) {
+
+
+    try {
+        const myToken = JSON.parse(localStorage.getItem('token'))
+
+        const response =
+            await fetch(`${BASE}routines/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${myToken}`
+                }
+            })
+
+        const { data } = await response.json();
+        return data;
+
+    } catch (error) {
+        console.log(error)
+    }
+
+};
+
+export async function deleteRoutineActivities(id) {
+
+
+    try {
+        const myToken = JSON.parse(localStorage.getItem('token'))
+
+        const response =
+            await fetch(`${BASE}routine_activities/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${myToken}`
+                }
+            })
+
+        const { data } = await response.json();
+        return data;
+
+    } catch (error) {
+        console.log(error)
+    }
+
+};
+
+export async function myId() {
+
+
+    try {
+        const myToken = JSON.parse(localStorage.getItem('token'))
+
+        const response =
+            await fetch(`${BASE}users/me`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${myToken}`
+                }
+            })
+
+        const { data } = await response.json();
+        return data;
+
+    } catch (error) {
+        console.log(error)
+    }
+
+};
+
+
+
+
+

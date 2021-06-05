@@ -4,3 +4,8 @@ export { default as MyRoutines } from './MyRoutines';
 export { default as Navigation } from './Navigation';
 export { default as Routines } from './Routines';
 export { default as Header } from './Header';
+export { default as Pages } from './Pages';
+export { default as Home } from './Home';
+export { default as UpdateRoutine } from './UpdateRoutine';
+export { default as Register } from './Register';
+export { default as CreateActivity } from './CreateActivity';

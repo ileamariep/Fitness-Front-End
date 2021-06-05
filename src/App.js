@@ -1,25 +1,62 @@
-
+import React, { useState } from 'react'
 import './App.css';
-import { Activities, Header, Login, MyRoutines, Navigation, Routines } from './components';
+import { Header, Pages }
+  from './components';
 
 function App() {
+  const [activityList, setActivityList] = useState([]);
 
+  const [currentUser, setCurrentUser] = useState(false);
+
+  const [routines, setRoutines] = useState([
+    {
+      id: "",
+      creatorId: "",
+      isPublic: true,
+      name: "",
+      goal: "",
+      creatorName: "",
+      activities: [{ id: '', name: '', description: '', duration: '', count: '', routineActivityId: '', routineId: '' }],
+    },
+  ]);
+  const [myRoutines, setMyRoutines] = useState([]);
+  const [results, setResults] = useState([]);
+  const [aRoutine, setSingleRoutine] = useState([
+    {
+      id: "",
+      creatorId: "",
+      isPublic: true,
+      name: "",
+      goal: "",
+      creatorName: "",
+      activities: [{ id: '', name: '', description: '', duration: '', count: '', routineActivityId: '', routineId: '' }],
+    }
+  ])
 
   return (
     <div className="App">
-      <h1>I am App app - everything goes in here</h1>
+      <Header
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+      />
+      <main>
+        <Pages
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          activityList={activityList}
+          setActivityList={setActivityList}
+          routines={routines}
+          setRoutines={setRoutines}
+          myRoutines={myRoutines}
+          setMyRoutines={setMyRoutines}
+          results={results}
+          setResults={setResults}
+          aRoutine={aRoutine}
+          setSingleRoutine={setSingleRoutine}
 
-      <Header />
-
-      <Activities />
-
-      <Login />
-
-      <MyRoutines />
-
-      <Navigation />
-
-      <Routines />
+        />
+      </main>
+      <footer>Fitness Tracker</footer>
 
     </div>
   );

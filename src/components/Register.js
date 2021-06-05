@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { loginUser } from '../api'
+import { registerUser } from '../api'
 
 
-const Login = ({ setCurrentUser, currentUser }) => {
+const Register = () => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
 
 
-
     const HandleFormSubmit = (event) => {
-        loginUser(username, password)
-        setCurrentUser(true)
+        registerUser(username, password)
         setUserName("")
         setPassword("")
         event.preventDefault();
@@ -19,7 +17,7 @@ const Login = ({ setCurrentUser, currentUser }) => {
 
     return (
         <form onSubmit={HandleFormSubmit}>
-            <h1>Login</h1>
+            <h1>Create Account</h1>
 
             <label>
                 Username:
@@ -45,10 +43,10 @@ const Login = ({ setCurrentUser, currentUser }) => {
                     required />
             </label>
 
-            <button type='submit'>Login</button>
+            <button type='submit'>Register</button>
         </form>
     );
 }
 
 
-export default Login;
+export default Register;
