@@ -6,43 +6,53 @@ const CreateRoutine = ({ routines, setRoutines }) => {
     const [routineGoal, setRoutineGoal] = useState("");
 
 
+
+
+
     const HandleFormSubmit = (event) => {
         createRoutine(routineName, routineGoal)
+
 
         event.preventDefault();
     }
 
+
+
     return (
-        <form onSubmit={HandleFormSubmit}>
-            <h1>Create Routine</h1>
+        <div className='form-container'>
+            <form onSubmit={HandleFormSubmit}>
+                <h1>Create Routine</h1>
+                <br />
 
-            <label>
-                Routine Name:
-          <input
-                    name="Routine Name"
+                <label>
+                    <h3>Name</h3>
+                    <input
+                        name="Routine Name"
 
-                    value={routineName}
-                    onInput={(event) => {
-                        setRoutineName(event.target.value)
-                    }}
-                    required />
-            </label>
+                        value={routineName}
+                        onInput={(event) => {
+                            setRoutineName(event.target.value)
+                        }}
+                        required />
+                </label>
+                <br />
+                <label className='routineGoal'>
+                    <h3>Goal</h3>
+                    <input
+                        name="Routine Goal"
 
-            <label>
-                Routine Goal:
-          <input
-                    name="Routine Goal"
-
-                    value={routineGoal}
-                    onInput={(event) => {
-                        setRoutineGoal(event.target.value)
-                    }}
-                    required />
-            </label>
-
-            <button type='submit'>Submit</button>
-        </form>
+                        value={routineGoal}
+                        onInput={(event) => {
+                            setRoutineGoal(event.target.value)
+                        }}
+                        required />
+                </label>
+                <br />
+                <button type='submit' className='log-btn'>Submit</button>
+            </form>
+        </div>
     );
+
 }
 
 

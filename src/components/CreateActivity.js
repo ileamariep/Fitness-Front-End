@@ -5,44 +5,49 @@ const CreateActivity = () => {
     const [activityName, setActivityName] = useState("");
     const [actvitiyDescription, setActivityDescription] = useState("");
 
-
     const HandleFormSubmit = (event) => {
         createActivity(activityName, actvitiyDescription)
 
         event.preventDefault();
     }
 
+
+
     return (
-        <form onSubmit={HandleFormSubmit}>
-            <h1>Create Activity</h1>
+        <div className='form-container'>
+            <form onSubmit={HandleFormSubmit}>
+                <h1>Create Activity</h1>
+                <br />
+                <label>
+                    <h3>Activity Name</h3>
+                    <input
+                        name="Activity Name"
 
-            <label>
-                Activity Name:
-          <input
-                    name="Activity Name"
+                        value={activityName}
+                        onInput={(event) => {
+                            setActivityName(event.target.value)
+                        }}
+                        required />
+                </label>
+                <br />
+                <label>
+                    <h3>Description</h3>
+                    <input
+                        name="Description"
 
-                    value={activityName}
-                    onInput={(event) => {
-                        setActivityName(event.target.value)
-                    }}
-                    required />
-            </label>
+                        value={actvitiyDescription}
+                        onInput={(event) => {
+                            setActivityDescription(event.target.value)
+                        }}
+                        required />
+                </label>
 
-            <label>
-                Description:
-          <input
-                    name="Description"
-
-                    value={actvitiyDescription}
-                    onInput={(event) => {
-                        setActivityDescription(event.target.value)
-                    }}
-                    required />
-            </label>
-
-            <button type='submit'>Login</button>
-        </form>
+                <br />
+                <button type='submit' className='log-btn'>CREATE</button>
+            </form>
+        </div>
     );
+
 }
 
 

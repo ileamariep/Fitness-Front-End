@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { getPublicRoutines } from '../api'
-import { Link } from "react-router-dom";
-import {
-    CREATE_ROUTINE_ROUTE
-} from "../constants";
+
 
 const Routines = ({ routines, setRoutines }) => {
 
@@ -38,13 +35,15 @@ const Routines = ({ routines, setRoutines }) => {
                             <div className='card-goal'>Goal:<p>{goal}</p></div>
                             <div>Activities</div>
                             <div className='card-activity'>
-                                {
-                                    activities.map(({ id, name, description, duration, count, routineActivityId, routineId }) =>
-                                        <div className='activities' key={id}> {name}</div>
-                                    )
-                                }
+                                <>
+                                    {
+                                        activities.map(({ id, name, description, duration, count, routineActivityId, routineId }) =>
+                                            <div className='activities' key={id}> {name}, Count: {count}, Duration: {duration}</div>
+                                        )
+                                    }
+                                </>
                             </div>
-                            <Link to={`${CREATE_ROUTINE_ROUTE}/${id}`} className="btn btn-primary" id={id}>Update</Link>
+
                         </div>
                     </div>
                 ))}

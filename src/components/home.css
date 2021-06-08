@@ -1,0 +1,65 @@
+.home-container {
+  display: grid;
+  grid-area: main;
+  grid-template: 10% auto 10% / 20% 60% 20%;
+  grid-row-start: 1;
+  width: 100vw;
+}
+
+.home-inner-container {
+  display: grid;
+  grid-area: main;
+  grid-template: 10% 20% 15% 15% 15% auto auto / 1fr 1fr 5%;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 6px;
+  max-width: 751.18px;
+  max-height: 481.406px;
+
+  justify-self: center;
+}
+
+.log-btn {
+  margin: 20px 5px 10px 5px;
+}
+.reg-btn {
+  margin: 10px 5px 10px 5px;
+}
+
+.welcome-message {
+  color: black;
+  font-size: 1.25em;
+}
+
+.log-btn,
+.reg-btn {
+  color: white;
+  background-color: blue;
+  align-self: center;
+  justify-self: center;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 1em;
+  width: 117.132px;
+  height: 58px;
+}
+
+.mess-btn-container {
+  grid-row-start: 2;
+  grid-row-end: 5;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  display: grid;
+  grid-template: 1fr 1fr 1fr/100%;
+}
+
+.centerP {
+  display: grid;
+  align-self: center;
+  justify-self: center;
+  margin-top: 15%;
+}

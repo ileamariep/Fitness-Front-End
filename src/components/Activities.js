@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 
 import { getActivities } from '../api'
 
+import './activities.css';
+
 
 const Activities = ({ activityList, setActivityList }) => {
 
@@ -10,6 +12,7 @@ const Activities = ({ activityList, setActivityList }) => {
         getActivities()
             .then(activity => {
                 setActivityList(activity);
+
             })
             .catch(error => {
                 // something something errors
@@ -27,8 +30,8 @@ const Activities = ({ activityList, setActivityList }) => {
                     description }) => (
                     <div key={id} className="activity-cards">
                         <div className="activity-card">
-                            <div className='card-name'>Activity Name:<p>{name}</p></div>
-                            <div className='card-goal'>Description:<p>{description}</p></div>
+                            <div className='card-name'>Activity Name<p>{name}</p></div>
+                            <div className='card-goal'>Description<p>{description}</p></div>
                         </div>
                     </div>
                 ))}

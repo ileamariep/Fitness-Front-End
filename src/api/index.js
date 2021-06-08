@@ -1,5 +1,10 @@
 import axios from 'axios';
 import { storeCurrentUser } from '../auth'
+import {
+    ROUTINES_ROUTE,
+    ACTIVITIES_ROUTE,
+    MY_ROUTINES_ROUTE
+} from "../constants";
 
 const BASE = 'https://fitnesstrac-kr.herokuapp.com/api/'
 
@@ -65,6 +70,7 @@ export async function registerUser(username, password) {
         const data = await response.json()
         const token = await data.token
         storeCurrentUser(token)
+        window.location.href = `${ROUTINES_ROUTE}`;
 
     } catch (error) {
         console.log(error)
@@ -89,6 +95,7 @@ export async function loginUser(username, password) {
         const data = await response.json()
         const token = await data.token
         storeCurrentUser(token)
+        window.location.href = `${ROUTINES_ROUTE}`;
 
     } catch (error) {
         console.log(error)
@@ -117,6 +124,7 @@ export async function createRoutine(name, goal) {
             })
 
         const data = await response.json()
+        window.location.href = `${MY_ROUTINES_ROUTE}`;
         return data
 
     } catch (error) {
@@ -129,7 +137,7 @@ export async function createActivity(name, description) {
 
 
     try {
-        const myToken = JSON.parse(localStorage.getItem('token'))
+        const myToken = await JSON.parse(localStorage.getItem('token'))
 
         const response =
             await fetch(`${BASE}activities`, {
@@ -145,6 +153,7 @@ export async function createActivity(name, description) {
             })
 
         const data = await response.json()
+        window.location.href = `${ACTIVITIES_ROUTE}`;
         return data
 
     } catch (error) {
@@ -170,6 +179,7 @@ export async function deleteRoutine(id) {
 
         const { data } = await response.json();
         return data;
+
 
     } catch (error) {
         console.log(error)
@@ -201,31 +211,45 @@ export async function deleteRoutineActivities(id) {
 
 };
 
-export async function myId() {
+export async function myUsernameFetch(myToken) {
 
 
     try {
-        const myToken = JSON.parse(localStorage.getItem('token'))
-
-        const response =
-            await fetch(`${BASE}users/me`, {
-                method: "GET",
+        return axios
+            .get(`${BASE}users/me`, {
                 headers: {
                     "Content-Type": "application/json",
-                    'Authorization': `Bearer ${myToken}`
-                }
+                    Authorization: `Bearer ${myToken}`,
+                },
             })
-
-        const { data } = await response.json();
-        return data;
-
-    } catch (error) {
-        console.log(error)
+            .then(({ data: { username } }) => {
+                return username;
+            });
+    } catch (err) {
+        console.error(err);
     }
 
 };
 
 
-
+export async function myRoutinesFetch(username, myToken) {
+    try {
+        return axios
+            .get(
+                `${BASE}users/${username}/routines`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${myToken}`,
+                    },
+                }
+            )
+            .then(({ data }) => {
+                return data;
+            });
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 

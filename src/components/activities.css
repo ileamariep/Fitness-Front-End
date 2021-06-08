@@ -1,0 +1,18 @@
+#activity-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 20px;
+  background-color: black;
+}
+
+.activity-cards {
+  grid-auto-flow: row;
+  margin: 7px;
+  padding: 15px;
+  color: white;
+  background-color: rgba(18, 19, 23, 1);
+  border-radius: 0.25rem;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}

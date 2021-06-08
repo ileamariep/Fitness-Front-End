@@ -9,7 +9,6 @@ import Navigation from './Navigation';
 const Header = ({ currentUser,
     setCurrentUser }) => {
 
-
     return (
         <header>
             <h1>Fitness Tracker</h1>

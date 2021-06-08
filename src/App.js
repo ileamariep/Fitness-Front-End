@@ -3,6 +3,7 @@ import './App.css';
 import { Header, Pages }
   from './components';
 
+
 function App() {
   const [activityList, setActivityList] = useState([]);
 
@@ -56,7 +57,7 @@ function App() {
 
         />
       </main>
-      <footer>Fitness Tracker</footer>
+
 
     </div>
   );
